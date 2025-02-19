@@ -2,7 +2,6 @@ package com.capitole.zara.controller;
 
 import com.capitole.zara.dto.response.PriceResponse;
 import com.capitole.zara.service.IPriceService;
-import com.capitole.zara.service.PriceService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/api/v1")
@@ -24,7 +22,7 @@ public class PricesController {
         this.priceService = priceService;
     }
 
-    @GetMapping(value = "/prices")
+    @GetMapping(value = "/prices", produces = "application/json")
     public ResponseEntity<PriceResponse> getFinalPrice (
             @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate applicationDate,

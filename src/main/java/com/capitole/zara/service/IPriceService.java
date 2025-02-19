@@ -1,10 +1,8 @@
 package com.capitole.zara.service;
 
 import com.capitole.zara.dto.response.PriceResponse;
-import org.springframework.http.ResponseEntity;
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public interface IPriceService {
 

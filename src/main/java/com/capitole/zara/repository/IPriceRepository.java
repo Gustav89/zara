@@ -12,9 +12,6 @@ import java.util.Optional;
 @Repository
 public interface IPriceRepository extends JpaRepository<PriceEntity, Long> {
 
-    @Query(value = "select * from prices n where n.id = :id and n.deleted = FALSE" , nativeQuery = true)
-    Optional<PriceEntity> getPriceById(@Param("id") Long id);
-
     @Query(value = "SELECT * FROM prices n \n" +
             "WHERE :applicationDate BETWEEN start_date AND end_date \n" +
             "and n.product_id = :productId \n" +

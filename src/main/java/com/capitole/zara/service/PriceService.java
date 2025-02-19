@@ -7,7 +7,6 @@ import com.capitole.zara.repository.IPriceRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 
 @Service("priceService")
@@ -19,12 +18,9 @@ public class PriceService implements IPriceService{
         this.priceRepository = priceRepository;
     }
 
-
-    //agregarle el objeto body que viene desde postman
     @Override
     public PriceResponse getPriceFinalPrice(LocalDate applicationDate, int productId, int brandId) throws Exception {
 
-        //cambiar a uso de la db
         Optional<PriceEntity> price = priceRepository.getPriceByDateAndPriority(applicationDate, productId, brandId);
 
         if(price.isPresent()){

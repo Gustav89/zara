@@ -15,8 +15,6 @@ import java.util.Arrays;
 @Slf4j
 @Component
 public class GeneralAspect {
-
-
     @Before("execution(* com.capitole.zara.controller.PricesController.getFinalPrice(..))")
     public void validateParameters(JoinPoint joinPoint){
 
@@ -31,7 +29,6 @@ public class GeneralAspect {
             });
         }
     }
-
 
     private void validateIds(int value){
         if(value < 1){
