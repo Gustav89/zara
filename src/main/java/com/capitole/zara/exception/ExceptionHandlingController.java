@@ -16,6 +16,10 @@ public class ExceptionHandlingController extends ResponseEntityExceptionHandler 
             NoPriceExistException s = (NoPriceExistException) ex;
             return new  ResponseEntity<>(getExceptionResponse(s.getMessage()),HttpStatus.NOT_FOUND);
         }
+        else if(ex instanceof GeneralAspectException){
+            GeneralAspectException g = (GeneralAspectException) ex;
+            return new  ResponseEntity<>(getExceptionResponse(g.getMessage()), HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ofNullable(getExceptionResponse(ex.getMessage()));
     }
 

@@ -25,7 +25,7 @@ public class PricesController {
     }
 
     @GetMapping(value = "/prices")
-    public ResponseEntity<PriceResponse> getPriceFinalPrice (
+    public ResponseEntity<PriceResponse> getFinalPrice (
             @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate applicationDate,
             @RequestParam int productId,
