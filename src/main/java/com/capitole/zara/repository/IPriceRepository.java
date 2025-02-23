@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -18,7 +19,7 @@ public interface IPriceRepository extends JpaRepository<PriceEntity, Long> {
             "and n.brand_id = :brandId \n" +
             "ORDER BY priority DESC \n" +
             "LIMIT 1;" , nativeQuery = true)
-    Optional<PriceEntity> getPriceByDateAndPriority(@Param("applicationDate") LocalDate applicationDate,
+    Optional<PriceEntity> getPriceByDateAndPriority(@Param("applicationDate") LocalDateTime applicationDate,
                                                     int productId, int brandId);
 
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(value = "/api/v1")
@@ -25,7 +26,7 @@ public class PricesController {
     @GetMapping(value = "/prices", produces = "application/json")
     public ResponseEntity<PriceResponse> getFinalPrice (
             @RequestParam
-            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate applicationDate,
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime applicationDate,
             @RequestParam int productId,
             @RequestParam int brandId) throws Exception {
         return ResponseEntity.ok(priceService.getPriceFinalPrice(applicationDate , productId,brandId));

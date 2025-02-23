@@ -13,13 +13,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(c -> {
                     c.ignoringRequestMatchers("/api/v1/prices");
                     c.ignoringRequestMatchers("/api/v1/prices/*");
                 });
+
+
+
+
 
         return httpSecurity.build();
     }

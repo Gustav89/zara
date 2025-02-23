@@ -7,6 +7,7 @@ import com.capitole.zara.repository.IPriceRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service("priceService")
@@ -19,7 +20,7 @@ public class PriceService implements IPriceService{
     }
 
     @Override
-    public PriceResponse getPriceFinalPrice(LocalDate applicationDate, int productId, int brandId) throws Exception {
+    public PriceResponse getPriceFinalPrice(LocalDateTime applicationDate, int productId, int brandId) throws Exception {
 
         Optional<PriceEntity> price = priceRepository.getPriceByDateAndPriority(applicationDate, productId, brandId);
 

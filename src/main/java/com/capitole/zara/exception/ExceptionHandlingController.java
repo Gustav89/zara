@@ -20,7 +20,7 @@ public class ExceptionHandlingController extends ResponseEntityExceptionHandler 
             GeneralAspectException g = (GeneralAspectException) ex;
             return new  ResponseEntity<>(getExceptionResponse(g.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ofNullable(getExceptionResponse(ex.getMessage()));
+        return new ResponseEntity<>(getExceptionResponse(ex.getMessage()),HttpStatus.NOT_FOUND);
     }
 
 
