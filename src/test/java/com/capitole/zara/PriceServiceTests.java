@@ -48,7 +48,7 @@ public class PriceServiceTests {
         Mockito.when(this.repository.getPriceByDateAndPriority(applicationDate,productId,brandId))
                 .thenReturn(getPriceResponse(Float.parseFloat("35.50"),"EUR"));
 
-       PriceResponse response = service.getPriceFinalPrice(applicationDate, productId, brandId);
+       PriceResponse response = service.getPrice(applicationDate, productId, brandId);
 
         Assertions.assertEquals(35.50, response.getPrice());
         Assertions.assertEquals("EUR", response.getCurr());
@@ -70,7 +70,7 @@ public class PriceServiceTests {
 
         Assertions.assertThrows(NoPriceExistException.class,
                 () -> {
-                    PriceResponse response = service.getPriceFinalPrice(applicationDate, productId, brandId);
+                    PriceResponse response = service.getPrice(applicationDate, productId, brandId);
                 });
     }
 

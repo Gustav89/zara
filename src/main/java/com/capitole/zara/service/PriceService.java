@@ -20,7 +20,7 @@ public class PriceService implements IPriceService{
     }
 
     @Override
-    public PriceResponse getPriceFinalPrice(LocalDateTime applicationDate, int productId, int brandId) throws Exception {
+    public PriceResponse getPrice(LocalDateTime applicationDate, int productId, int brandId) throws Exception {
 
         Optional<PriceEntity> price = priceRepository.getPriceByDateAndPriority(applicationDate, productId, brandId);
 

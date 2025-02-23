@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Zara - API de Precios
+  description: API para obtener el precio de un producto según la fecha y la marca
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/ALVAREZGUSTAVOMATIAS/zara/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8081/api/v1
+paths:
+  /prices:
+    get:
+      summary: Obtener el precio de un producto para una fecha y marca específica
+      description: Recupera el precio de un producto para una fecha y marca dada.
+      parameters:
+      - name: applicationDate
+        in: query
+        description: Fecha en la que se aplica el precio.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: 2020-06-14 00:00:00
+      - name: productId
+        in: query
+        description: ID del producto.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 35455
+      - name: brandId
+        in: query
+        description: ID de la marca.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: Precio encontrado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "401":
+          description: No autenticado (usuario o contraseña incorrectos)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: No se encontró el precio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    inline_response_404:
+      type: object
+      properties:
+        message:
+          type: string
+          example: El precio a aplicar no existe
+    inline_response_200:
+      type: object
+      properties:
+        brandId:
+          type: integer
+          example: 1
+        startDate:
+          type: string
+          example: 2020-06-14T00:00:00.000+00:00
+        endDate:
+          type: string
+          example: 2020-12-31T23:59:59.000+00:00
+        priceList:
+          type: integer
+          example: 1
+        productId:
+          type: integer
+          example: 35455
+        price:
+          type: number
+          format: float
+          example: 35.5
+        curr:
+          type: string
+          example: EUR
+    inline_response_401:
+      type: object
+      properties:
+        message:
+          type: string
+          example: No autorizado
+    inline_response_400:
+      type: object
+      properties:
+        message:
+          type: string
+          example: El valor del parametro no es valido
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

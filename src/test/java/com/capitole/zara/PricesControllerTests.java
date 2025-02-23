@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
@@ -47,7 +46,7 @@ public class PricesControllerTests {
         int productId = 35455;
         int brandId = 1;
 
-        Mockito.when(service.getPriceFinalPrice(applicationDate, productId, brandId))
+        Mockito.when(service.getPrice(applicationDate, productId, brandId))
                 .thenReturn(getPriceResponse(Float.parseFloat("35.50"),"EUR").getBody());
 
         ResponseEntity<PriceResponse> response =  this.pricesController.getFinalPrice(applicationDate, productId, brandId);

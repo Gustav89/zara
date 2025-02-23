@@ -6,11 +6,8 @@ import com.capitole.zara.exception.ExceptionHandlingController;
 import com.capitole.zara.exception.GeneralAspectException;
 import com.capitole.zara.exception.NoPriceExistException;
 import com.capitole.zara.service.IPriceService;
-import com.capitole.zara.service.PriceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -68,7 +65,7 @@ public class ErrorHandlerControllerTests {
         int brandId = 1;
 
 
-        doThrow(new NoPriceExistException("El precio a aplicar no existe")).when(priceService).getPriceFinalPrice(applicationDate, productId, brandId);
+        doThrow(new NoPriceExistException("El precio a aplicar no existe")).when(priceService).getPrice(applicationDate, productId, brandId);
 
         mockMvc.perform(get("/api/v1/prices")
                         .param("productId", "35456")
@@ -87,7 +84,7 @@ public class ErrorHandlerControllerTests {
         int brandId = 0;
 
 
-        doThrow(new GeneralAspectException("El valor del parametro no es valido")).when(priceService).getPriceFinalPrice(applicationDate, productId, brandId);
+        doThrow(new GeneralAspectException("El valor del parametro no es valido")).when(priceService).getPrice(applicationDate, productId, brandId);
 
         mockMvc.perform(get("/api/v1/prices")
                         .param("productId", "35456")
@@ -106,7 +103,7 @@ public class ErrorHandlerControllerTests {
         int brandId = 0;
 
 
-        doThrow(new Exception("generic")).when(priceService).getPriceFinalPrice(applicationDate, productId, brandId);
+        doThrow(new Exception("generic")).when(priceService).getPrice(applicationDate, productId, brandId);
 
         mockMvc.perform(get("/api/v1/prices")
                         .param("productId", "35456")
