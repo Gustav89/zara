@@ -52,6 +52,35 @@ el archivo de la coleccion de postman se encuentra en resources/postman
 - Capitole.postman_collection.json
 - Capitole.postman_environment.json
 
+
+# Ejecución de Tests en Postman
+
+Para ejecutar la batería de tests, es necesario tener el proyecto en funcionamiento, ya sea a través de Docker, Maven o directamente desde el editor.
+
+Los tests están completamente integrados en Postman, y para ejecutarlos debes seguir estos pasos:
+
+## 1. Importar la colección y el environment
+Es fundamental importar tanto la colección como el environment en Postman, ya que este último contiene las variables necesarias para la autenticación.
+
+## 2. Ejecutar la colección de tests
+- Dirígete a la sección **Collections** en Postman.
+- Haz clic en los tres puntos de la colección y selecciona **Run collection** como se muestra en la siguiente imagen:
+
+  ![Paso 2](../zara/src/main/resources/images/paso1_tests.png)
+
+## 3. Configurar la ejecución
+- Define el tiempo de espera entre solicitudes en milisegundos (en nuestro caso, 5 ms).
+- Presiona el botón **Run Capitole**.
+
+  ![Paso 3](../zara/src/main/resources/images/paso2_tests.png)
+
+## 4. Validar la ejecución de los tests
+- Una vez finalizada la ejecución, verifica que los tests se hayan completado exitosamente.
+- Deberían ejecutarse **30 tests** y todos deben estar validados.
+
+  ![Paso 4](../zara/src/main/resources/images/paso3_tests.png)
+
+
 #### Ejemplo de autenticación en Postman: ####
 1. Ir a la pestaña **Authorization**.
 2. Seleccionar **Basic Auth**.

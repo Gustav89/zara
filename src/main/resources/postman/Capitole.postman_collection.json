@@ -2,12 +2,31 @@
 	"info": {
 		"_postman_id": "c2ff8c6a-7aa4-4065-b3dc-29cca48aecb8",
 		"name": "Capitole",
+		"description": "**Descripción de la Colección - Pruebas de getPrice**\n\nEsta colección de Postman contiene pruebas automatizadas para el endpoint `getPrice`, verificando distintos escenarios relacionados con la obtención de precios de productos en función de la fecha, el `productid` y el `brandid`.\n\n### **Escenarios de prueba incluidos:**\n\n- Fechas válidas e inválidas.\n    \n- `productid` y `brandid` existentes, inexistentes o con valores `0`.\n    \n- Validación del código de respuesta HTTP.\n    \n- Verificación de que el precio y la moneda sean correctos en casos esperados.\n    \n\nCada prueba valida que el servicio responde correctamente, asegurando que los datos retornados sean los esperados según las reglas de negocio definidas en la base de datos.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13045761"
 	},
 	"item": [
 		{
-			"name": "getPriceFinalPrice",
+			"name": "getPrice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 35.5;\r",
+							"tests[\"Correct curr\"] = data.curr === \"EUR\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -26,8 +45,17 @@
 				},
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId=35455&brandId=1",
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId={{productId}}&brandId={{brandId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,11 +73,852 @@
 						},
 						{
 							"key": "productId",
-							"value": "35455"
+							"value": "{{productId}}"
 						},
 						{
 							"key": "brandId",
-							"value": "1"
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice 10:00 del día 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 35.5;\r",
+							"tests[\"Correct curr\"] = data.curr === \"EUR\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2010:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2010:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice 16:00 del día 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 25.45;\r",
+							"tests[\"Correct curr\"] = data.curr === \"USD\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2016:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2016:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice 21:00 del día 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 35.5;\r",
+							"tests[\"Correct curr\"] = data.curr === \"EUR\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2021:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2021:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice 10:00 del día 15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 30.50;\r",
+							"tests[\"Correct curr\"] = data.curr === \"EUR\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-15%2010:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-15%2010:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice 21:00 del día 16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = pm.response.code === 200;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct Price\"] = data.price === 38.95;\r",
+							"tests[\"Correct curr\"] = data.curr === \"USD\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-16%2021:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-16%2021:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceproductNoExist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 404\"] = pm.response.code === 404;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.message === \"El precio a aplicar no existe\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId=2&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2000:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "2"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceproductinvalidValue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 400\"] = pm.response.code === 400;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.message === \"El valor del parametro no es valido\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId=0&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2000:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "0"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceBrandIdNoExist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 404\"] = pm.response.code === 404;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.message === \"El precio a aplicar no existe\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId={{productId}}&brandId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2000:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceBrandIdInvalidValue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 400\"] = pm.response.code === 400;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.message === \"El valor del parametro no es valido\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020-06-14%2000:00:00&productId={{productId}}&brandId=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14%2000:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceapplicationDateNoExist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 404\"] = pm.response.code === 404;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.message === \"El precio a aplicar no existe\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2077-06-14%2000:00:00&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2077-06-14%2000:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPriceapplicationDateInvalidValue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 400\"] = pm.response.code === 400;\r",
+							"var data = JSON.parse(pm.response.text());\r",
+							"tests[\"Correct message\"] = data.detail === \"Failed to convert 'applicationDate' with value: '2020'\";"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/prices?applicationDate=2020&productId={{productId}}&brandId={{brandId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020"
+						},
+						{
+							"key": "productId",
+							"value": "{{productId}}"
+						},
+						{
+							"key": "brandId",
+							"value": "{{brandId}}"
 						}
 					]
 				}
