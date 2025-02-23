@@ -93,6 +93,9 @@ en ./Zara - API de Precios.yaml
 ##  Despliegue con Docker (Opcional)
 ###  1. Construir la imagen y contenedor de Docker
 ```bash
+# si no fue compilada en el paso 3  
+# Compilar el proyecto
+# Ejecutar docker compose
 docker compose up
 ```
 
